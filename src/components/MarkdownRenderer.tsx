@@ -220,14 +220,14 @@ function getMermaidConfig(): MermaidConfig {
   return { startOnLoad:false, securityLevel:'strict', theme:'default' }
 }
 
-marked.setOptions({
-  highlight(code, lang){
-    if (lang && hljs.getLanguage(lang)){
-      return hljs.highlight(code, { language: lang }).value
+marked.use({
+  highlight(code: string, lang: string) {
+    if (lang && hljs.getLanguage(lang)) {
+      return hljs.highlight(code, { language: lang }).value;
     }
-    return hljs.highlightAuto(code).value
+    return hljs.highlightAuto(code).value;
   }
-})
+});
 
 export default function MarkdownRenderer({ content }:{ content: string }){
   const html = useMemo(()=>{
