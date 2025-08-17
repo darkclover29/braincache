@@ -221,13 +221,17 @@ function getMermaidConfig(): MermaidConfig {
 }
 
 marked.use({
-  highlight(code: string, lang: string) {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(code, { language: lang }).value;
+  hooks: {
+    code(code: string, infostring: string | undefined) {
+      const lang = (infostring || '').trim().toLowerCase();
+      if (lang && hljs.getLanguage(lang)) {
+        return hljs.highlight(code, { language: lang }).value;
+      }
+      return hljs.highlightAuto(code).value;
     }
-    return hljs.highlightAuto(code).value;
   }
 });
+
 
 export default function MarkdownRenderer({ content }:{ content: string }){
   const html = useMemo(()=>{
