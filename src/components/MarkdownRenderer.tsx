@@ -4,6 +4,7 @@ import DOMPurify from 'dompurify'
 import hljs from 'highlight.js'
 import mermaid, { MermaidConfig } from 'mermaid'
 import 'highlight.js/styles/github-dark.css'
+import type { MarkedOptions } from "marked";
 
 export type Heading = { depth: number; text: string; id: string }
 
@@ -220,15 +221,14 @@ function getMermaidConfig(): MermaidConfig {
   return { startOnLoad:false, securityLevel:'strict', theme:'default' }
 }
 
+// Override highlighting (ignore TS type complaints)
 marked.use({
-  hooks: {
-    code(code: string, infostring: string | undefined) {
-      const lang = (infostring || '').trim().toLowerCase();
-      if (lang && hljs.getLanguage(lang)) {
-        return hljs.highlight(code, { language: lang }).value;
-      }
-      return hljs.highlightAuto(code).value;
+  // @ts-ignore
+  highlight(code: string, lang: string) {
+    if (lang && hljs.getLanguage(lang)) {
+      return hljs.highlight(code, { language: lang }).value;
     }
+    return hljs.highlightAuto(code).value;
   }
 });
 
