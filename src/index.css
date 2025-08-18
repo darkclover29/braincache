@@ -93,3 +93,210 @@ footer .logo .text { font-size: 1rem; }
 .page-content svg[id^="mmd-"]{width:100%;height:auto;}
 
 .page-content svg[id^="mmd-"]{width:100%;height:auto;}
+.container-responsive { max-width: 1100px; margin: 0 auto; padding-left: 1rem; padding-right: 1rem; }
+
+.btn { border: 1px solid var(--border); padding: .4rem .7rem; border-radius: .6rem; background: var(--card); }
+.btn:hover { background: var(--muted); }
+
+.chip { padding: .3rem .6rem; border: 1px solid var(--border); border-radius: 999px; font-size: .85rem; }
+.chip-active { background: var(--muted); }
+
+.card { border: 1px solid var(--border); border-radius: 1rem; background: var(--card); }
+
+.input { border:1px solid var(--border); background: var(--card); border-radius:.6rem; padding:.5rem .7rem; width:100%; }
+
+:root {
+  --border: hsl(220 14% 30% / 0.25);
+  --card: hsl(220 14% 96% / 1);
+  --muted: hsl(220 14% 90% / 1);
+  --foreground: hsl(220 14% 12% / 1);
+}
+.dark {
+  --border: hsl(220 14% 30% / 0.35);
+  --card: hsl(220 14% 10% / 1);
+  --muted: hsl(220 14% 16% / 1);
+  --foreground: hsl(220 14% 96% / 1);
+}
+.text-foreground\/60 { color: color-mix(in oklab, var(--foreground) 60%, transparent); }
+.bg-card { background: var(--card); }
+.border-border { border-color: var(--border); }
+.hover\:bg-muted:hover { background: var(--muted); }
+/* ---------- Base theming: make body always honor theme tokens ---------- */
+:root,
+.theme-light {
+  --background: #ffffff;
+  --card: #ffffff;
+  --muted: #f5f7fb;
+  --border: rgba(20, 23, 28, 0.12);
+  --foreground: #0f172a; /* slate-900 */
+}
+
+.dark,
+.theme-dark {
+  --background: #0b1220; /* deep navy */
+  --card: #0f172a;       /* slate-900-ish */
+  --muted: #111a2e;      /* slightly lighter than bg */
+  --border: rgba(148, 163, 184, 0.18);
+  --foreground: #e6edf3; /* light text */
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+}
+* { color: inherit; } /* ensure components inherit foreground unless overridden */
+
+/* prose inside notes should invert on dark already; enforce subtle links */
+.prose a { text-decoration: underline; }
+.dark .prose a { color: #93c5fd; }
+
+/* ---------- UI atoms used in cards ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: .6rem;
+  padding: .45rem .7rem;
+}
+.btn:hover { background: var(--muted); }
+
+.chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .32rem .6rem;
+  font-size: .85rem;
+  line-height: 1;
+  background: var(--card);
+}
+.chip-active { background: var(--muted); }
+
+.pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .22rem .6rem;
+  font-size: .78rem;
+  background: var(--card);
+}
+.pill.muted { opacity: .8; }
+
+.stat {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: .25rem .55rem;
+  font-size: .78rem;
+  background: var(--muted);
+}
+
+.icon-blob {
+  display:inline-flex; align-items:center; justify-content:center;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  font-size: 20px;
+}
+
+/* ---------- Interview card accent strip (like your screenshot) ---------- */
+.interview-card { position: relative; overflow: hidden; }
+.interview-card::before {
+  content:""; position:absolute; left:0; right:0; top:0; height:6px;
+  background: var(--accent, linear-gradient(90deg,#60a5fa,#22d3ee));
+}
+
+/* Accent palettes (map via class on the card) */
+.accent-blue   { --accent: linear-gradient(90deg,#60a5fa,#22d3ee); }
+.accent-purple { --accent: linear-gradient(90deg,#a78bfa,#f472b6); }
+.accent-amber  { --accent: linear-gradient(90deg,#f59e0b,#fbbf24); }
+.accent-green  { --accent: linear-gradient(90deg,#22c55e,#86efac); }
+.accent-cyan   { --accent: linear-gradient(90deg,#06b6d4,#22d3ee); }
+.accent-teal   { --accent: linear-gradient(90deg,#14b8a6,#2dd4bf); }
+
+/* ---------- Optional: align link color for all themes ---------- */
+.link { color: inherit; opacity: .8; }
+.link:hover { opacity: 1; text-decoration: underline; }
+/* Ensure base always respects theme variables */
+html, body { background: var(--background); color: var(--foreground); }
+* { color: inherit; }
+
+/* Light / Dark (base) */
+.theme-light, :root {
+  --background:#ffffff; --card:#ffffff; --muted:#f5f7fb;
+  --border: rgba(10,10,10,.12); --foreground:#0f172a;
+}
+.theme-dark, .dark {
+  --background:#0b1220; --card:#0f172a; --muted:#121a2c;
+  --border: rgba(148,163,184,.18); --foreground:#e6edf3;
+}
+
+/* Dracula */
+.theme-dracula {
+  --background:#282a36; --card:#303347; --muted:#3a3d52;
+  --border: rgba(248,248,242,.14); --foreground:#f8f8f2;
+}
+/* Solarized Light */
+.theme-solarized-light {
+  --background:#fdf6e3; --card:#fffdf5; --muted:#f3eacc;
+  --border: rgba(88,110,117,.25); --foreground:#586e75;
+}
+/* Solarized Dark */
+.theme-solarized-dark {
+  --background:#002b36; --card:#073642; --muted:#0a3947;
+  --border: rgba(131,148,150,.25); --foreground:#eee8d5;
+}
+/* One Dark */
+.theme-one-dark {
+  --background:#282c34; --card:#313640; --muted:#3b4048;
+  --border: rgba(171,178,191,.22); --foreground:#abb2bf;
+}
+/* Monokai */
+.theme-monokai {
+  --background:#272822; --card:#2f3029; --muted:#3a3b33;
+  --border: rgba(248,248,242,.18); --foreground:#f8f8f2;
+}
+/* Nord */
+.theme-nord {
+  --background:#2e3440; --card:#3b4252; --muted:#434c5e;
+  --border: rgba(216,222,233,.18); --foreground:#d8dee9;
+}
+/* Gruvbox Dark */
+.theme-gruvbox-dark {
+  --background:#282828; --card:#3c3836; --muted:#504945;
+  --border: rgba(235,219,178,.18); --foreground:#ebdbb2;
+}
+/* Gruvbox Light */
+.theme-gruvbox-light {
+  --background:#fbf1c7; --card:#f2e5bc; --muted:#ebdbb2;
+  --border: rgba(60,56,54,.22); --foreground:#3c3836;
+}
+/* Catppuccin Mocha */
+.theme-catppuccin-mocha {
+  --background:#1e1e2e; --card:#181825; --muted:#313244;
+  --border: rgba(205,214,244,.18); --foreground:#cdd6f4;
+}
+/* Ayu Dark */
+.theme-ayu-dark {
+  --background:#1f2430; --card:#141a24; --muted:#394151;
+  --border: rgba(217,215,206,.18); --foreground:#d9d7ce;
+}
+
+/* Reusable UI (cards, chips, etc.) */
+.card{background:var(--card);border:1px solid var(--border);border-radius:1rem;}
+.btn{background:var(--card);border:1px solid var(--border);border-radius:.6rem;padding:.45rem .7rem;}
+.btn:hover{background:var(--muted);}
+.chip{border:1px solid var(--border);border-radius:999px;padding:.32rem .6rem;font-size:.85rem;background:var(--card);}
+.pill{border:1px solid var(--border);border-radius:999px;padding:.22rem .6rem;font-size:.78rem;background:var(--card);}
+.pill.muted{opacity:.8;}
+.stat{border:1px solid var(--border);border-radius:999px;padding:.25rem .55rem;font-size:.78rem;background:var(--muted);}
+.icon-blob{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--muted);border:1px solid var(--border);font-size:20px;}
+.interview-card{position:relative;overflow:hidden;}
+.interview-card::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:var(--accent,linear-gradient(90deg,#60a5fa,#22d3ee));}
+.accent-blue{--accent:linear-gradient(90deg,#60a5fa,#22d3ee);}
+.accent-purple{--accent:linear-gradient(90deg,#a78bfa,#f472b6);}
+.accent-amber{--accent:linear-gradient(90deg,#f59e0b,#fbbf24);}
+.accent-green{--accent:linear-gradient(90deg,#22c55e,#86efac);}
+.accent-cyan{--accent:linear-gradient(90deg,#06b6d4,#22d3ee);}
+.accent-teal{--accent:linear-gradient(90deg,#14b8a6,#2dd4bf);}
